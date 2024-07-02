@@ -10,7 +10,7 @@ Valet
 
 .. container:: buttons
 
-    `Docs <install.html>`_
+    `Docs <install-os.html>`_
     `GitHub <https://github.com/tapsterbot>`_
 
 .. grid:: 1 1 2 3
@@ -41,12 +41,10 @@ Valet
     .. grid-item-card:: :octicon:`people` Raspberry Pi-powered
 
         Benefit from the versatile Pi platform and its robust community.
-        
-        
+
+
 .. toctree::
     :caption: Getting started
-    :hidden: 
+    :hidden:
 
-    building
-    install
-        
+    install-os.md
