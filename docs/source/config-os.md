@@ -8,7 +8,7 @@ ssh tapster@valet-vision.local
 
 ## Once connected to Valet, run this script:
 ```bash
-curl -sL https://github.com/tapsterbot/valet/source/machine-setup.py | python3
+curl -sL https://raw.githubusercontent.com/tapsterbot/valet/main/source/machine-setup.py | python3
 ```
 
 ## What does the script do?
