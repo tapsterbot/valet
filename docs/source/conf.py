@@ -40,5 +40,8 @@ html_theme_options = {
     "twitter_url": "https://twitter.com/tapsterbot"
 }
 
+# This is needed to render custom domain correctly on GitHub Pages
+html_extra_path = ['CNAME']
+
 html_show_copyright = True
 html_show_sphinx = False
