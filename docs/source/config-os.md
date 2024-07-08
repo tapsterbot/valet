@@ -1,7 +1,7 @@
 # How to Configure Raspberry Pi OS for Valet
 
 ## Connect to Valet
-Use username and passwrd from [Raspberry Pi Imager settings](install-os.md#a-general-settings)
+Use username and password from [Raspberry Pi Imager settings](install-os.md#a-general-settings)
 ```bash
 ssh tapster@valet-vision.local
 ```
