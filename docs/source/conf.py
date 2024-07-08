@@ -19,7 +19,8 @@ exclude_patterns = []
 
 extensions = [
     "sphinx_design",
-    "myst_parser"
+    "myst_parser",
+    "sphinx_copybutton"
 ]
 
 myst_enable_extensions = [
@@ -32,8 +33,6 @@ myst_enable_extensions = [
 
 html_theme = 'shibuya'
 html_static_path = ['_static']
-
-
 
 html_theme_options = {  
     "github_url": "https://github.com/tapsterbot",
