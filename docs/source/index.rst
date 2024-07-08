@@ -10,8 +10,8 @@ Valet
 
 .. container:: buttons
 
-    `Docs <install-os.html>`_
-    `GitHub <https://github.com/tapsterbot>`_
+    `Docs <getting-started.html>`_
+    `GitHub <https://github.com/tapsterbot/valet>`_
 
 .. grid:: 1 1 2 3
     :gutter: 2
@@ -45,6 +45,7 @@ Valet
 
 .. toctree::
     :caption: Getting started
-    :hidden:
 
+    getting-started.md
     install-os.md
+    config-os.md

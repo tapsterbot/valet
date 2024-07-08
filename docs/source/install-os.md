@@ -87,20 +87,30 @@
 ![Choose OPTIONS tab](./images/options-settings-changed.png)
 
 
+### 7d. Save Settings
+- When you're done making changes to the settings, click on **SAVE**.
+
+### 7e. Apply Settings
+- When asked "Would you like to apply OS customization setttings?", click **YES**.
+  ![Apply Settings?](./images/apply-settings-question.png)
 
 ### 8. Write the OS to the SD Card
-- Click on **Write**.
-- Confirm that you want to overwrite the data on the card.
+- When asked "Are you sure you want to continue", click **YES** to continue.
+  ![Continue?](./images/continue-warning.png)
+- If you're shown an admin prompt, grant the Imager permission to continue.
+  ![Admin Permission](./images/admin-permission.png)
 - Wait for the writing process to complete; this may take a few minutes.
+  ![Write the Image](./images/writing-the-image.png)
 
 ### 9. Safely Eject the SD Card
-- After the writing process is complete, safely eject the SD card from your computer.
+- After the writing process is complete, click **CONTNIUE** and safely eject the SD card from your computer.
+  ![Write Successful](./images/write-successful.png)
+
 
 ### 10. Boot Up Your Valet
 - Insert the MicroSD card into the Valet's Raspberry Pi.
 - (Optional) If no wireless connection was configured, connect a wired network cable to the Valet.
 - Connect the Valet to a power supply.
-- Enjoy living in the future of mobile automation.
 
 ### 🎉 Well done!
-You're all set! Your Valet's Raspberry Pi is now running Raspberry Pi OS, ready for your projects.
+Well, almost! Your Valet's Raspberry Pi is now running Raspberry Pi OS, but next we need to install Valet specific software.
