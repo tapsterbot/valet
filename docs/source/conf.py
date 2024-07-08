@@ -43,5 +43,9 @@ html_theme_options = {
 # This is needed to render custom domain correctly on GitHub Pages
 html_extra_path = ['CNAME']
 
+# Hide .html extension in URLs
+html_file_suffix = None
+html_link_suffix = ""
+
 html_show_copyright = True
 html_show_sphinx = False

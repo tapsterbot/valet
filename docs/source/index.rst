@@ -10,7 +10,7 @@ Valet
 
 .. container:: buttons
 
-    `Docs <getting-started.html>`_
+    `Docs <getting-started>`_
     `GitHub <https://github.com/tapsterbot/valet>`_
 
 .. grid:: 1 1 2 3
