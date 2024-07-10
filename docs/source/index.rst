@@ -49,3 +49,8 @@ Valet
     getting-started.md
     install-os.md
     config-os.md
+
+.. toctree::
+    :caption: Explanation
+
+    overview.md

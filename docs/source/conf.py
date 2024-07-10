@@ -20,7 +20,8 @@ exclude_patterns = []
 extensions = [
     "sphinx_design",
     "myst_parser",
-    "sphinx_copybutton"
+    "sphinx_copybutton",
+    "sphinxcontrib.mermaid"
 ]
 
 myst_enable_extensions = [
@@ -48,3 +49,10 @@ html_link_suffix = ""
 
 html_show_copyright = True
 html_show_sphinx = False
+
+# -- Options for Mermaid drawing output -------------------------------------------------
+# https://mermaid.js.org/syntax/sequenceDiagram.html#configuration
+mermaid_d3_zoom = True
+mermaid_init_js = """mermaid.initialize({
+  mirrorActors: true
+})"""
