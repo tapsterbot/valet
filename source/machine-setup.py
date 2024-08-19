@@ -123,6 +123,7 @@ shell("""cd /home/tapster/Projects/valet/;
          wget https://davesteele.github.io/comitup/deb/comitup_1.42-1_all.deb;
          sudo dpkg -i --force-all comitup_*.deb;
          sudo apt-get update;
+         sudo apt-get install -y python3-cachetools python3-networkmanager;
          sudo apt-get install -y comitup;""")
 
 # Allow NetworkManager to manage the wifi interfaces
