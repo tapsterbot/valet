@@ -120,10 +120,12 @@ shell("""cd /home/tapster/Projects/valet/checkbox-server/service;
 shell("""cd /home/tapster/Projects/valet/;
          mkdir comitup;
          cd comitup;
+         wget https://davesteele.github.io/comitup/deb/python3-networkmanager_2.2-3_all.deb;
+         sudo dpkg -i --force-all python3-networkmanager*.deb;
          wget https://davesteele.github.io/comitup/deb/comitup_1.42-1_all.deb;
          sudo dpkg -i --force-all comitup_*.deb;
          sudo apt-get update;
-         sudo apt-get install -y python3-cachetools python3-networkmanager;
+         sudo apt-get install -y python3-cachetools;
          sudo apt-get install -y comitup;""")
 
 # Allow NetworkManager to manage the wifi interfaces
