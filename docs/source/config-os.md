@@ -6,10 +6,31 @@ Use username and password from [Raspberry Pi Imager settings](install-os.md#a-ge
 ssh tapster@valet-vision.local
 ```
 
-## Once connected to Valet, run this script:
+## Once connected, move to the Documents directory
 ```bash
-curl -sL https://raw.githubusercontent.com/tapsterbot/valet/main/source/machine-setup.py | python3
+cd ~/Documents
 ```
+
+## Download the machine set-up script
+```bash
+curl -sL https://raw.githubusercontent.com/tapsterbot/valet/main/source/machine-setup.py -o machine-setup.py
+```
+## Run the set-up script:
+**For Valet Link**:
+```bash
+python machine-setup.py --link
+```
+**For Valet Vision**:
+```bash
+python machine-setup.py --vision
+```
+***Note***: By default, Valet is set up as a Wi-Fi hotspot on first boot, to make it easier to connect to your main Wi-Fi network. If you want to disable this feature, include an additional flag:
+```bash
+python  machine-setup.py --link --nohotspot
+or
+python  machine-setup.py --vision --nohotspot
+```
+
 
 ## What does the script do?
 - Run raspi-config:
@@ -21,7 +42,7 @@ curl -sL https://raw.githubusercontent.com/tapsterbot/valet/main/source/machine-
 - Install libcamera libraries
 - Install OpenCV for computer vision
 - Install Tesseract OCR and Pytesseract for text recognition
-- Install [zero-hid](https://github.com/tapsterbot/zero-hid/tree/dev) library for mouse & keyboard control
+- Install [zero-hid](https://github.com/tapsterbot/zero-hid/tree/touch-support) library for mouse & keyboard control
 - Install [Checkbox server](https://github.com/tapsterbot/checkbox-server)
 - Install [Checkbox client](https://github.com/tapsterbot/checkbox-client-python)
 - (*Optional*): Install [Comitup](https://github.com/davesteele/comitup) for easy Wi-Fi onboarding
