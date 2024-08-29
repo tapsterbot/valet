@@ -7,9 +7,9 @@ def shell(command):
 # Install required Python core libs
 shell("sudo apt-get update")
 shell("sudo apt-get upgrade -y")
-shell("sudo apt-get install -y vim git python3-pip")
-shell("sudo apt-get install --upgrade python3-setuptools")
-shell("sudo apt-get install -y python3.11-venv")
+shell("sudo apt-get install -y expect git vim python3-pip")
+shell("sudo apt-get install -y --upgrade python3-setuptools")
+shell("sudo apt-get install -y python3-venv")
 
 # Raspberry Pi Config
 shell("sudo raspi-config nonint do_vnc 0") #Enable VNC
@@ -41,11 +41,12 @@ shell("""cd /home/tapster/Projects/valet;
          source env/bin/activate;
          git clone https://github.com/tapsterbot/zero-hid.git;
          cd zero-hid;
-         git checkout dev""")
+         git checkout touch-support""")
 
 # Install usb_gadget
-shell("cd /home/tapster/Projects/valet/zero-hid/usb_gadget; chmod +x installer.bash;")
-shell("cd /home/tapster/Projects/valet/zero-hid/usb_gadget; sudo ./installer.bash;")
+shell("cd /home/tapster/Projects/valet/zero-hid/usb_gadget; chmod +x installer;")
+shell("""cd /home/tapster/Projects/valet/zero-hid/usb_gadget;
+         sudo expect -c 'spawn ./installer; expect "Do you want to reboot? (Y/n)"; send "n\n"; interact';""")
 
 # Install zero-hid library
 shell("""cd /home/tapster/Projects/valet;
