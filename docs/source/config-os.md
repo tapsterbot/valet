@@ -26,9 +26,9 @@ python machine-setup.py --vision
 ```
 ***Note***: By default, Valet is set up as a Wi-Fi hotspot on first boot, to make it easier to connect to your main Wi-Fi network. If you want to disable this feature, include an additional flag:
 ```bash
-python  machine-setup.py --link --nohotspot
+python machine-setup.py --link --nohotspot
 or
-python  machine-setup.py --vision --nohotspot
+python machine-setup.py --vision --nohotspot
 ```
 
 
