@@ -34,12 +34,13 @@ else:
 
 print()
 
-# Install required Python core libs
+# Install required packages
 shell("sudo apt-get update")
 shell("sudo apt-get upgrade -y")
 shell("sudo apt-get install -y expect git vim python3-pip")
 shell("sudo apt-get install -y --upgrade python3-setuptools")
 shell("sudo apt-get install -y python3-venv")
+shell("sudo apt install -y dnsmasq iptables")
 
 # Raspberry Pi Config
 shell("sudo raspi-config nonint do_vnc 0") #Enable VNC
@@ -66,6 +67,37 @@ shell("cd /home/tapster/Projects/valet; source env/bin/activate; python3 -m pip 
 # Install Tesseract for Python
 shell("cd /home/tapster/Projects/valet; source env/bin/activate; python3 -m pip install pytesseract")
 
+# Configuration for USB Ethernet gadget
+# Add usb0 interface /etc/dnsmasq.d/usb0
+cmd = 'echo """' + \
+      'interface=usb0       # Use interface usb0\n' + \
+      'listen-address=192.168.42.42   # Specify the address to listen on\n' + \
+      'bind-dynamic         # Bind to the interface\n' + \
+      'server=8.8.8.8       # Use Google DNS\n' + \
+      'domain-needed        # Don\'t forward short names\n' + \
+      'bogus-priv           # Drop the non-routed address spaces\n' + \
+      'dhcp-range=192.168.42.50,192.168.42.60,12h\n' + \
+      'dhcp-option=option:router,192.168.42.42\n' + \
+      'dhcp-option=option:dns-server,8.8.8.8' + \
+      '"""' + \
+      ' | sudo tee /etc/dnsmasq.d/usb0'
+shell(cmd)
+
+# Add usb0 interface to network interfaces file
+cmd = 'echo """' + \
+      'auto usb0\n' + \
+      'allow-hotplug usb0\n' + \
+      'iface usb0 inet static\n' + \
+      '  address 192.168.42.42\n' + \
+      '  netmask 255.255.255.0' + \
+      '"""' + \
+      ' | sudo tee /etc/network/interfaces.d/usb0'
+shell(cmd)
+
+# Enable IP forwarding
+cmd = 'echo net.ipv4.ip_forward=1 | sudo tee /etc/sysctl.d/routing.conf'
+shell(cmd)
+
 # Checkout zero-hid library
 shell("""cd /home/tapster/Projects/valet;
          source env/bin/activate;
@@ -77,6 +109,16 @@ shell("""cd /home/tapster/Projects/valet;
 shell("cd /home/tapster/Projects/valet/zero-hid/usb_gadget; chmod +x installer;")
 shell("""cd /home/tapster/Projects/valet/zero-hid/usb_gadget;
          sudo expect -c 'spawn ./installer; expect "Do you want to reboot? (Y/n)"; send "n\n"; interact';""")
+
+# Set firewall forwarding & NAT rules
+cmd = "sudo sed -i '/^\/usr\/bin\/init_usb_gadget/i \\\n" + \
+      'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE\\' + \
+      "' /etc/rc.local"
+shell(cmd)
+
+# Restart dnsmasq after loading USB gadget
+cmd = "sudo sed -i '/^exit 0/i service dnsmasq restart' /etc/rc.local"
+shell(cmd)
 
 # Install zero-hid library
 shell("""cd /home/tapster/Projects/valet;
