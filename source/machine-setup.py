@@ -39,7 +39,7 @@ shell("sudo apt-get update")
 shell("sudo apt-get upgrade -y")
 shell("sudo apt-get install -y expect git vim python3-pip")
 shell("sudo apt-get install -y --upgrade python3-setuptools")
-shell("sudo apt-get install -y python3-venv")
+shell("sudo apt-get install -y python3-venv python3-pil python3-numpy")
 shell("sudo apt install -y dnsmasq iptables")
 
 # Raspberry Pi Config
@@ -52,6 +52,10 @@ if args.vision:
     shell("sudo raspi-config nonint do_i2c 0") # Enable I2c
     # Install libcamera libraries
     shell("sudo apt-get install -y libcamera-v4l2 libcamera-tools libcamera-apps")
+    # For Checkbox Display Server
+    shell("sudo apt install -y fonts-dejavu")
+    shell("sudo apt install -y i2c-tools libgpiod-dev python3-libgpiod")
+
 ##########################################
 
 # Install OCR packages
@@ -142,6 +146,23 @@ if args.vision:
     # Install Tapster LCD display test script
     shell("""cd /home/tapster/Projects/valet;
              git clone https://gist.github.com/hugs/559aa69d8870630bda790e77847f9847 setup-test;""")
+
+    # For Checkbox Display Server
+    shell("""cd /home/tapster/Projects/valet;
+             source env/bin/activate;
+             git clone https://github.com/tapsterbot/checkbox-display-server.git;
+             cd checkbox-display-server;
+             python3 -m pip install --upgrade --force-reinstall spidev;
+             python3 -m pip install --upgrade -r requirements.txt;""")
+
+    # Install Checkbox Display Server Service
+    shell("""cd /home/tapster/Projects/valet/checkbox-display-server/service;
+             sudo cp checkbox-display-server.service /etc/systemd/system/checkbox-display-server.service;
+             sudo chmod 644 /etc/systemd/system/checkbox-display-server.service;
+             sudo systemctl daemon-reload;
+             sudo systemctl start checkbox-display-server;
+             sudo systemctl enable checkbox-display-server;""")
+
 ##########################################
 
 # Install Checkbox server
