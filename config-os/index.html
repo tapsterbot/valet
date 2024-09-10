@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>How to Configure Raspberry Pi OS for Valet - Valet 0.1 documentation</title><link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="Architecture Overview" href="../overview/" /><link rel="prev" title="How to Install Raspberry Pi OS on an SD Card" href="../install-os/" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=397bb51e" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=36d120a7" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="How to Configure Raspberry Pi OS for Valet"/>
+<meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../">
+      
+      
+      <strong>Valet</strong>
+    </a>
+    <div class="sy-head-nav" id="HeadNav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search/" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/tapsterbot/valet" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+<a href="https://twitter.com/tapsterbot" aria-label="X (Twitter)">
+  <iconify-icon icon="prime:twitter"></iconify-icon>
+</a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="HeadNav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started with Valet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-os/">How to Install Raspberry Pi OS on an SD Card</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Configure Raspberry Pi OS for Valet</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Explanation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/">Architecture Overview</a></li>
+</ul>
+
+        </div>
+      </div></div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#connect-to-valet">Connect to Valet</a></li>
+<li><a class="reference internal" href="#once-connected-move-to-the-documents-directory">Once connected, move to the Documents directory</a></li>
+<li><a class="reference internal" href="#download-the-machine-set-up-script">Download the machine set-up script</a></li>
+<li><a class="reference internal" href="#run-the-set-up-script">Run the set-up script:</a></li>
+<li><a class="reference internal" href="#what-does-the-script-do">What does the script do?</a><ul>
+<li><a class="reference internal" href="#valet-vision-only">Valet Vision Only</a></li>
+<li><a class="reference internal" href="#valet-link-only">Valet Link Only</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6"><div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../"><span itemprop="name">Valet</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">How to Configure Raspberry Pi OS for Valet</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="how-to-configure-raspberry-pi-os-for-valet">
+<h1>How to Configure Raspberry Pi OS for Valet<a class="headerlink" href="#how-to-configure-raspberry-pi-os-for-valet" title="Link to this heading">¶</a></h1>
+<section id="connect-to-valet">
+<h2>Connect to Valet<a class="headerlink" href="#connect-to-valet" title="Link to this heading">¶</a></h2>
+<p>Use username and password from <a class="reference internal" href="../install-os/#a-general-settings"><span class="std std-ref">Raspberry Pi Imager settings</span></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">ssh<span class="w"> </span>tapster@valet-vision.local
+</span></pre></div>
+</div>
+</section>
+<section id="once-connected-move-to-the-documents-directory">
+<h2>Once connected, move to the Documents directory<a class="headerlink" href="#once-connected-move-to-the-documents-directory" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">cd</span><span class="w"> </span>~/Documents
+</span></pre></div>
+</div>
+</section>
+<section id="download-the-machine-set-up-script">
+<h2>Download the machine set-up script<a class="headerlink" href="#download-the-machine-set-up-script" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">curl<span class="w"> </span>-sL<span class="w"> </span>https://raw.githubusercontent.com/tapsterbot/valet/main/source/machine-setup.py<span class="w"> </span>-o<span class="w"> </span>machine-setup.py
+</span></pre></div>
+</div>
+</section>
+<section id="run-the-set-up-script">
+<h2>Run the set-up script:<a class="headerlink" href="#run-the-set-up-script" title="Link to this heading">¶</a></h2>
+<p><strong>For Valet Link</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">python<span class="w"> </span>machine-setup.py<span class="w"> </span>--link
+</span></pre></div>
+</div>
+<p><strong>For Valet Vision</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">python<span class="w"> </span>machine-setup.py<span class="w"> </span>--vision
+</span></pre></div>
+</div>
+<p><em><strong>Note</strong></em>: By default, Valet is set up as a Wi-Fi hotspot on first boot, to make it easier to connect to your main Wi-Fi network. If you want to disable this feature, include an additional flag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">python<span class="w"> </span>machine-setup.py<span class="w"> </span>--link<span class="w"> </span>--nohotspot
+</span><span data-line="2">or
+</span><span data-line="3">python<span class="w"> </span>machine-setup.py<span class="w"> </span>--vision<span class="w"> </span>--nohotspot
+</span></pre></div>
+</div>
+</section>
+<section id="what-does-the-script-do">
+<h2>What does the script do?<a class="headerlink" href="#what-does-the-script-do" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run raspi-config:</p>
+<ul>
+<li><p>Enable VNC for remote desktop access</p></li>
+<li><p><em>(Valet Vision)</em>: Enable SPI to control the TFT display</p></li>
+<li><p><em>(Valet Vision)</em>: Enable I2C to control the TFT display</p></li>
+</ul>
+</li>
+<li><p>Create Python virtual environment</p></li>
+<li><p>Install required Python libraries</p></li>
+<li><p>Install libcamera libraries</p></li>
+<li><p>Install OpenCV for computer vision</p></li>
+<li><p>Install Tesseract OCR and Pytesseract for text recognition</p></li>
+<li><p>Install <a class="reference external" href="https://github.com/tapsterbot/zero-hid/tree/touch-support">zero-hid</a> library for mouse &amp; keyboard control</p></li>
+<li><p>Install <a class="reference external" href="https://github.com/tapsterbot/checkbox-server">Checkbox server</a></p></li>
+<li><p>Install <a class="reference external" href="https://github.com/tapsterbot/checkbox-client-python">Checkbox client</a></p></li>
+<li><p><em>(Optional)</em>: Install <a class="reference external" href="https://github.com/davesteele/comitup">Comitup</a> for easy Wi-Fi onboarding</p></li>
+</ul>
+<section id="valet-vision-only">
+<h3>Valet Vision Only<a class="headerlink" href="#valet-vision-only" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Install <a class="reference external" href="https://github.com/adafruit/Adafruit_Blinka">Blinka</a> library (for controlling TFT display)</p></li>
+<li><p>Install <a class="reference external" href="https://github.com/tapsterbot/checkbox-display-server">Checkbox display server</a></p></li>
+<li><p>Install TFT display test script</p></li>
+</ul>
+</section>
+<section id="valet-link-only">
+<h3>Valet Link Only<a class="headerlink" href="#valet-link-only" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Set required video capture settings</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../install-os/">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">How to Install Raspberry Pi OS on an SD Card</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../overview/">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Architecture Overview</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+
+  <footer class="sy-foot">
+    <div class="sy-foot-inner sy-container mx-auto">
+      <div class="sy-foot-reserved md:flex justify-between items-center">
+        <div class="sy-foot-copyright"><p>© 2024 <a href="https://tapster.io/">Tapster Robotics, Inc.</a></p>
+          
+        </div>
+        <div class="sy-foot-socials">
+<a href="https://github.com/tapsterbot/valet" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a>
+<a href="https://twitter.com/tapsterbot" aria-label="X (Twitter)">
+  <iconify-icon icon="prime:twitter"></iconify-icon>
+</a></div>
+      </div>
+    </div>
+  </footer>
+
+      <script src="../_static/documentation_options.js?v=ec1fdc2c"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=c5fc9e80"></script></body>
+</html>
