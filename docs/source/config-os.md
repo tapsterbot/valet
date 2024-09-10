@@ -35,8 +35,8 @@ python machine-setup.py --vision --nohotspot
 ## What does the script do?
 - Run raspi-config:
   - Enable VNC for remote desktop access
-  - (*Valet Vision*): Enable SPI to control the TFT display
-  - (*Valet Vision*): Enable I2C to control the TFT display
+  - *(Valet Vision)*: Enable SPI to control the TFT display
+  - *(Valet Vision)*: Enable I2C to control the TFT display
 - Create Python virtual environment
 - Install required Python libraries
 - Install libcamera libraries
@@ -45,7 +45,7 @@ python machine-setup.py --vision --nohotspot
 - Install [zero-hid](https://github.com/tapsterbot/zero-hid/tree/touch-support) library for mouse & keyboard control
 - Install [Checkbox server](https://github.com/tapsterbot/checkbox-server)
 - Install [Checkbox client](https://github.com/tapsterbot/checkbox-client-python)
-- (*Optional*): Install [Comitup](https://github.com/davesteele/comitup) for easy Wi-Fi onboarding
+- *(Optional)*: Install [Comitup](https://github.com/davesteele/comitup) for easy Wi-Fi onboarding
 
 ### Valet Vision Only
 - Install [Blinka](https://github.com/adafruit/Adafruit_Blinka) library (for controlling TFT display)
