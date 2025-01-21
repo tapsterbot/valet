@@ -133,6 +133,32 @@ shell("""cd /home/tapster/Projects/valet;
          source env/bin/activate;
          python3 -m pip install ./zero-hid/;""")
 
+
+
+# For Push Button Module (PBM) Dynamixel-powered side-button support:
+## Enable serial connection hardware
+shell("sudo raspi-config nonint do_serial_hw 0")
+## Disable shell on serial connection
+shell("sudo raspi-config nonint do_serial_cons 1")
+
+## For Raspberry Pi 4, set UART0 (aka PL011, aka "/dev/ttyAMA0") as primary UART
+# (Other Pi versions untested, and might be different)
+# More info: https://www.raspberrypi.com/documentation/computers/configuration.html#configure-uarts
+shell("""echo "dtoverlay=disable-bt" | sudo tee -a /boot/firmware/config.txt""")
+shell("sudo systemctl disable hciuart")
+
+## Install required libs:
+shell("""cd /home/tapster/Projects/valet; 
+         source env/bin/activate; 
+         python3 -m pip install pyserial lgpio gpiozero;""")
+
+# Install DynamixelSDK
+shell("""cd /home/tapster/Projects/valet;
+         source env/bin/activate; 
+         git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git;
+         cd DynamixelSDK/python/;
+         python3 setup.py install;""")
+
 ##########################################
 # For Valet Vision Only
 if args.vision:
