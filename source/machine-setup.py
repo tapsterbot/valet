@@ -278,5 +278,5 @@ else:
     # Edit comitup access point name
     shell("""sudo sed -i '/^# ap_name: comitup-<nnn>/a ap_name: <hostname>' /etc/comitup.conf""")
 
-shell("sudo reboot now")
+shell("sudo reboot")
 
