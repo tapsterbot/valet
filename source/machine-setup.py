@@ -103,6 +103,10 @@ cmd = 'echo net.ipv4.ip_forward=1 | sudo tee /etc/sysctl.d/routing.conf'
 shell(cmd)
 
 # Checkout zero-hid library
+# Re-add rc.local because it was removed in latest RPi OS. :/ TODO: Move away from rc.local?
+shell("sudo touch /etc/rc.local")
+shell("sudo chmod 755 /etc/rc.local")
+
 shell("""cd /home/tapster/Projects/valet;
          source env/bin/activate;
          git clone https://github.com/tapsterbot/zero-hid.git;
