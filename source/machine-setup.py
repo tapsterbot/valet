@@ -106,6 +106,7 @@ shell(cmd)
 # Re-add rc.local because it was removed in latest RPi OS. :/ TODO: Move away from rc.local?
 shell("sudo touch /etc/rc.local")
 shell("sudo chmod 755 /etc/rc.local")
+shell("""echo -e '#!/bin/sh -e\nexit 0' | sudo tee -a /etc/rc.local""")
 
 shell("""cd /home/tapster/Projects/valet;
          source env/bin/activate;
