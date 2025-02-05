@@ -247,6 +247,9 @@ if args.vision:
 if args.nohotspot:
     pass
 else:
+    # Set Wi-Fi country code. #TODO: Make this a command-line flag and/or optional
+    shell("sudo raspi-config nonint do_wifi_country US")
+    
     # Install Comitup
     shell("""cd /home/tapster/Projects/valet/;
              mkdir comitup;
