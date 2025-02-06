@@ -88,6 +88,7 @@ cmd = 'echo """' + \
 shell(cmd)
 
 # Add usb0 interface to network interfaces file
+shell("mkdir -p /etc/network/interfaces.d")
 cmd = 'echo """' + \
       'auto usb0\n' + \
       'allow-hotplug usb0\n' + \
