@@ -52,6 +52,8 @@ if args.vision:
     shell("sudo raspi-config nonint do_i2c 0") # Enable I2c
     # Install libcamera libraries
     shell("sudo apt-get install -y libcamera-v4l2 libcamera-tools libcamera-apps")
+    # Install Picamera2 library
+    shell("sudo apt-get install -y python3-picamera2")
     # For Checkbox Display Server
     shell("sudo apt install -y fonts-dejavu")
     shell("sudo apt install -y i2c-tools libgpiod-dev python3-libgpiod")
@@ -66,7 +68,7 @@ shell("cd /home/tapster/; mkdir -p Projects/valet")
 shell("cd /home/tapster/Projects/valet; python -m venv env --system-site-packages")
 
 # Install OpenCV for Python
-shell("cd /home/tapster/Projects/valet; source env/bin/activate; python3 -m pip install opencv-contrib-python")
+shell("sudo apt install -y python3-opencv opencv-data")
 
 # Install Tesseract for Python
 shell("cd /home/tapster/Projects/valet; source env/bin/activate; python3 -m pip install pytesseract")
