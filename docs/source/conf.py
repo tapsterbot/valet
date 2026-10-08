@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Valet'
-copyright = '© 2024 <a href="https://tapster.io/">Tapster Robotics, Inc.</a>'
+copyright = '© <a href="https://tapster.io/">Tapster Robotics, Inc.</a>'
 author = 'Tapster Robotics, Inc.'
 release = '0.1'
 
