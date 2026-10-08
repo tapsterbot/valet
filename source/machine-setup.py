@@ -224,6 +224,9 @@ shell("""cd /home/tapster/Projects/valet;
 ##########################################
 # For Valet Link Only:
 if args.link:
+    # Install v4l2-ctl (used by Checkbox server to set up HDMI capture)
+    shell("sudo apt-get install -y v4l-utils")
+
     # Required video capture settings
     shell("""echo "dtoverlay=tc358743" | sudo tee -a /boot/firmware/config.txt;
              echo "dtoverlay=tc358743-audio" | sudo tee -a /boot/firmware/config.txt;""")
