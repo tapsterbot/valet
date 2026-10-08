@@ -44,6 +44,7 @@ python machine-setup.py --vision --nohotspot
 - Install OpenCV for computer vision
 - Install Tesseract OCR and Pytesseract for text recognition
 - Install [zero-hid](https://github.com/tapsterbot/zero-hid/tree/touch-support) library for mouse & keyboard control
+- Set up USB networking, so a connected phone gets an IP address and internet access through Valet
 - Install [Checkbox server](https://github.com/tapsterbot/checkbox-server)
 - Install [Checkbox client](https://github.com/tapsterbot/checkbox-client-python)
 - *(Optional)*: Install [Comitup](https://github.com/davesteele/comitup) for easy Wi-Fi onboarding
