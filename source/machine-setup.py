@@ -253,16 +253,14 @@ else:
     # Set Wi-Fi country code. #TODO: Make this a command-line flag and/or optional
     shell("sudo raspi-config nonint do_wifi_country US")
     
-    # Install Comitup
+    # Install Comitup from its apt repo, so updates arrive with apt upgrade
+    # More info: https://davesteele.github.io/comitup/ppa.html
     shell("""cd /home/tapster/Projects/valet/;
-             mkdir comitup;
+             mkdir -p comitup;
              cd comitup;
-             wget https://davesteele.github.io/comitup/deb/python3-networkmanager_2.2-3_all.deb;
-             sudo dpkg -i --force-all python3-networkmanager*.deb;
-             wget https://davesteele.github.io/comitup/deb/comitup_1.42-1_all.deb;
-             sudo dpkg -i --force-all comitup_*.deb;
+             wget https://davesteele.github.io/comitup/deb/davesteele-comitup-apt-source_1.3_all.deb;
+             sudo dpkg -i davesteele-comitup-apt-source_1.3_all.deb;
              sudo apt-get update;
-             sudo apt-get install -y python3-cachetools;
              sudo apt-get install -y comitup;""")
 
     # Allow NetworkManager to manage the wifi interfaces
