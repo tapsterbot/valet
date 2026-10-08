@@ -10,102 +10,96 @@
 ### 1. Download Raspberry Pi Imager
 - Visit the [Raspberry Pi Imager download page](https://www.raspberrypi.com/software/).
 - Download and install the software for your operating system (Windows, macOS, or Linux).
+  :::{note}
+  These instructions are for Raspberry Pi Imager version 2.0 or later.
+  :::
 
 ### 2. Prepare the SD Card
 - Insert your MicroSD card into the card reader and connect it to your computer.
 
 ### 3. Launch Raspberry Pi Imager
-- Open the Raspberry Pi Imager application.
-  ![Raspberry Pi Imager](./images/raspberry-pi-os-imager-macos-1.8.5.png)
+- Open the Raspberry Pi Imager application. Imager walks you through each set-up step in order: **Device**, **OS**, **Storage**, **Customisation**, **Writing**, and **Done**.
 
 <hr>
 
 ### 4. Select the Device
-- Click on **CHOOSE DEVICE**.
-  ![Choose Device](./images/choose-device.png)
-- Select **Raspberry Pi 4**.
-  ![Select Raspberry Pi 4](./images/select-raspberry-pi-4.png)
+- Select **Raspberry Pi 4**, then click **NEXT**.
+  ![Select Raspberry Pi 4](./images/imager-select-device.png)
 
 <hr>
 
 ### 5. Select the OS
-- Click on **CHOOSE OS**.
-  ![Choose OS](./images/choose-os.png)
-- Select **Raspberry Pi OS (64-bit)**.
-  ![Select Raspberry Pi OS 64-bit](./images/select-raspberry-pi-os-64-bit.png)
+- Select **Raspberry Pi OS (64-bit)**, then click **NEXT**.
+  ![Select Raspberry Pi OS 64-bit](./images/imager-select-os.png)
 
 <hr>
 
 ### 6. Select the Storage
-- Click on **CHOOSE STORAGE**.
-  ![Choose STORAGE](./images/choose-storage.png)
-- Select your MicroSD card from the list.
-  ![Select MicroSD card](./images/select-storage-device.png)
+- Select your MicroSD card from the list, then click **NEXT**.
+  ![Select MicroSD card](./images/imager-select-storage.png)
+  :::{note}
+  Leave "Exclude system drives" checked, so you can't accidentally erase your computer's own drive.
+  :::
 
 <hr>
 
-### 7. Edit Settings
-- Click on **NEXT**.
-  ![Choose NEXT](./images/choose-next.png)
-- Click on **EDIT SETTINGS**.
-  ![Choose EDIT SETTINGS](./images/choose-edit-settings.png)
+### 7. Customise the OS
+Imager now walks you through the customisation settings, one screen at a time. Click **NEXT** after each one.
 
+### 7a. Hostname
+- Set the hostname to **valet-vision**, **valet-link**, (or some other preferred name).
+  ![Choose hostname](./images/imager-hostname.png)
+  :::{note}
+  If you will have more than one Valet on your network, we recommend adding a number after the hostname (e.g. "valet-vision-34").
+  :::
 
-### 7a. General Settings
-- Select the **GENERAL** tab and make the following changes:
-  - Set hostname to **valet-vision**, **valet-link**, (or some other preferred name).
-    :::{note}
-    If you will have more than one Valet on your network, we recommened adding a number after the hostname (e.g. "valet-vision-34").
-    :::
-  - Set the username to **tapster**.
-  - Enter a password and store it somewhere safe, like a password manager.
-  - If you'll be using a *wireless* network connection with your Valet, enter SSID and Wi-Fi password. However, if you'll be using a *wired* network connection, then leave "Configure wireless LAN" unselected and the SSID and password fields blank.
-    :::{note}
-    In the default installation, we do not set Wi-Fi credentials here with Raspberry Pi Imager; instead, we use _[Comitup](https://davesteele.github.io/comitup/)_ to bootstrap Wi-Fi support. However, the use of Comitup is configurable, and can be disabled when the system set-up scripts are run in a later step. If you really would rather set up Wi-Fi here, though, go for it!
-    :::
-  - *(Optional)* Set locale settings for your preferred time zone and keyboard layout.
-![Choose GENERAL tab](./images/general-settings-changed.png)
+### 7b. Localisation
+- *(Optional)* Set your time zone and keyboard layout.
+  ![Localisation](./images/imager-localisation.png)
 
-<hr>
+### 7c. User
+- Set the username to **tapster**.
+- Enter a password, then enter it again to confirm it. Store it somewhere safe, like a password manager.
+  ![Choose username](./images/imager-user.png)
 
-### 7b. Services Settings
-- Select the **SERVICES** tab.
-- Enable SSH and select "Use password authentication".
+### 7d. Wi-Fi
+- If you'll be using a *wireless* network connection with your Valet, enter the SSID (network name) and Wi-Fi password. However, if you'll be using a *wired* network connection, then leave the Wi-Fi fields blank.
+  ![Choose Wi-Fi](./images/imager-wifi.png)
+  :::{note}
+  On macOS, Imager may offer to fill in the Wi-Fi password from your system keychain. Click **NO** unless you want Valet to join the same Wi-Fi network as your computer.
+  :::
+  :::{note}
+  In the default installation, we do not set Wi-Fi credentials here with Raspberry Pi Imager; instead, we use _[Comitup](https://davesteele.github.io/comitup/)_ to bootstrap Wi-Fi support. However, the use of Comitup is configurable, and can be disabled when the system set-up scripts are run in a later step. If you really would rather set up Wi-Fi here, though, go for it!
+  :::
+
+### 7e. Remote Access
+- Turn on **Enable SSH** and select **Use password authentication**.
+  ![SSH authentication](./images/imager-ssh.png)
   :::{note}
   You can also enable key-based authentication later after logging into Valet.
   :::
-![Choose SERVICES tab](./images/services-settings-changed.png)
 
-### 7c. Options Settings
-- Select the **OPTIONS** tab.
-- If desired, deselect "Enable telemetry".
-  :::{note}
-  Information about the telemetry collected by Raspberry Pi Imager can be found the projects's [README](https://github.com/raspberrypi/rpi-imager/blob/qml/README.md#telemetry).
+### 7f. Raspberry Pi Connect
+- Leave **Enable Raspberry Pi Connect** turned off.
+  ![Raspberry Pi Connect](./images/imager-pi-connect.png)
 
-  Raspberry Pi Imager's collected stats are available at [https://rpi-imager-stats.raspberrypi.com/](https://rpi-imager-stats.raspberrypi.com/).
-  :::
-![Choose OPTIONS tab](./images/options-settings-changed.png)
-
-
-### 7d. Save Settings
-- When you're done making changes to the settings, click on **SAVE**.
-
-### 7e. Apply Settings
-- When asked "Would you like to apply OS customization setttings?", click **YES**.
-  ![Apply Settings?](./images/apply-settings-question.png)
+<hr>
 
 ### 8. Write the OS to the SD Card
-- When asked "Are you sure you want to continue", click **YES** to continue.
-  ![Continue?](./images/continue-warning.png)
+- Review the summary of your choices, then click **WRITE**.
+  ![Write image](./images/imager-write-summary.png)
+- When warned that all data on the SD card will be erased, click **I UNDERSTAND, ERASE AND WRITE**.
+  ![Erase warning](./images/imager-erase-warning.png)
 - If you're shown an admin prompt, grant the Imager permission to continue.
   ![Admin Permission](./images/admin-permission.png)
-- Wait for the writing process to complete; this may take a few minutes.
-  ![Write the Image](./images/writing-the-image.png)
+- Wait for the writing and verifying process to complete; this may take a few minutes.
+  ![Writing the image](./images/imager-writing.png)
 
-### 9. Safely Eject the SD Card
-- After the writing process is complete, click **CONTNIUE** and safely eject the SD card from your computer.
-  ![Write Successful](./images/write-successful.png)
+### 9. Remove the SD Card
+- When the write is complete, Imager ejects the SD card automatically. Click **FINISH** and remove the SD card from your computer.
+  ![Write complete](./images/imager-write-complete.png)
 
+<hr>
 
 ### 10. Boot Up Your Valet
 - Insert the MicroSD card into the Valet's Raspberry Pi.
