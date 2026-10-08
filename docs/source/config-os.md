@@ -30,6 +30,7 @@ python machine-setup.py --link --nohotspot
 or
 python machine-setup.py --vision --nohotspot
 ```
+***Note***: The script reboots Valet when it's finished. If you'd rather review the output first (including a summary of any failed commands), include the `--noreboot` flag and reboot manually afterwards.
 
 
 ## What does the script do?
