@@ -127,7 +127,10 @@ shell("sudo raspi-config nonint do_serial_cons 1")
 # (Other Pi versions untested, and might be different)
 # More info: https://www.raspberrypi.com/documentation/computers/configuration.html#configure-uarts
 shell("""echo "dtoverlay=disable-bt" | sudo tee -a /boot/firmware/config.txt""")
-shell("sudo systemctl disable hciuart")
+# hciuart.service no longer exists on Trixie; only disable it on older OS versions
+shell("""if systemctl list-unit-files hciuart.service | grep -q hciuart; then
+             sudo systemctl disable hciuart;
+         fi""")
 
 ## Install required libs:
 shell("""cd /home/tapster/Projects/valet; 
