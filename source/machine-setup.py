@@ -86,6 +86,8 @@ shell("cd /home/tapster/Projects/valet; source env/bin/activate; python3 -m pip 
 # Configuration for USB Ethernet gadget (usb0), so the connected phone gets an IP and internet access.
 # NetworkManager's "shared" mode gives usb0 a static address, runs a DHCP/DNS server for the phone,
 # and enables IP forwarding & NAT through whichever connection Valet is using (Ethernet or Wi-Fi).
+# NetworkManager leaves USB gadget interfaces unmanaged by default (85-nm-unmanaged.rules), so override that for usb0
+shell("""echo 'SUBSYSTEM=="net", ACTION=="add|change|move", ENV{INTERFACE}=="usb0", ENV{NM_UNMANAGED}="0"' | sudo tee /etc/udev/rules.d/86-valet-usb0-managed.rules""")
 shell("""sudo nmcli connection delete valet-usb0 > /dev/null 2>&1;
          sudo nmcli connection add type ethernet ifname usb0 con-name valet-usb0 \
              ipv4.method shared ipv4.addresses 192.168.42.42/24 \
