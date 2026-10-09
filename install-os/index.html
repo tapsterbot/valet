@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>How to Install Raspberry Pi OS on an SD Card - Valet 0.1 documentation</title><link rel="index" title="Index" href="../genindex/" /><link rel="search" title="Search" href="../search/" /><link rel="next" title="How to Configure Raspberry Pi OS for Valet" href="../config-os/" /><link rel="prev" title="Getting Started with Valet" href="../getting-started/" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="How to Install Raspberry Pi OS on an SD Card"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../">
+      
+      
+      <strong>Valet</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search/" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/tapsterbot/valet" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://twitter.com/tapsterbot" aria-label="X (Twitter)">
+    <iconify-icon icon="simple-icons:x"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started with Valet</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to Install Raspberry Pi OS on an SD Card</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config-os/">How to Configure Raspberry Pi OS for Valet</a></li>
+</ul>
+<p class="caption" role="heading" aria-level="3"><span class="caption-text">Explanation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/">Architecture Overview</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#materials-needed">Materials Needed:</a></li>
+<li><a class="reference internal" href="#instructions">Instructions:</a><ul>
+<li><a class="reference internal" href="#download-raspberry-pi-imager">1. Download Raspberry Pi Imager</a></li>
+<li><a class="reference internal" href="#prepare-the-sd-card">2. Prepare the SD Card</a></li>
+<li><a class="reference internal" href="#launch-raspberry-pi-imager">3. Launch Raspberry Pi Imager</a></li>
+<li><a class="reference internal" href="#select-the-device">4. Select the Device</a></li>
+<li><a class="reference internal" href="#select-the-os">5. Select the OS</a></li>
+<li><a class="reference internal" href="#select-the-storage">6. Select the Storage</a></li>
+<li><a class="reference internal" href="#customise-the-os">7. Customise the OS</a></li>
+<li><a class="reference internal" href="#a-hostname">7a. Hostname</a></li>
+<li><a class="reference internal" href="#b-localisation">7b. Localisation</a></li>
+<li><a class="reference internal" href="#c-user">7c. User</a></li>
+<li><a class="reference internal" href="#d-wi-fi">7d. Wi-Fi</a></li>
+<li><a class="reference internal" href="#e-remote-access">7e. Remote Access</a></li>
+<li><a class="reference internal" href="#f-raspberry-pi-connect">7f. Raspberry Pi Connect</a></li>
+<li><a class="reference internal" href="#write-the-os-to-the-sd-card">8. Write the OS to the SD Card</a></li>
+<li><a class="reference internal" href="#remove-the-sd-card">9. Remove the SD Card</a></li>
+<li><a class="reference internal" href="#boot-up-your-valet">10. Boot Up Your Valet</a></li>
+<li><a class="reference internal" href="#well-done">&#127881; Well done!</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../"><span itemprop="name">Valet</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">How to Install Raspberry Pi OS on an SD Card</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="how-to-install-raspberry-pi-os-on-an-sd-card">
+<h1>How to Install Raspberry Pi OS on an SD Card<a class="headerlink" href="#how-to-install-raspberry-pi-os-on-an-sd-card" title="Link to this heading">#</a></h1>
+<section id="materials-needed">
+<h2>Materials Needed:<a class="headerlink" href="#materials-needed" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Raspberry Pi 4 (minimum 4GB RAM, 8GB recommended)</p></li>
+<li><p>MicroSD Card (<a class="reference external" href="https://www.samsung.com/us/computing/memory-storage/memory-cards/pro-endurance-adapter-microsdxc-64gb-mb-mj64ka-am/">Samsung PRO Endurance</a>, 64GB recommended)</p></li>
+<li><p>MicroSD Card reader</p></li>
+</ul>
+</section>
+<section id="instructions">
+<h2>Instructions:<a class="headerlink" href="#instructions" title="Link to this heading">#</a></h2>
+<section id="download-raspberry-pi-imager">
+<h3>1. Download Raspberry Pi Imager<a class="headerlink" href="#download-raspberry-pi-imager" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Visit the <a class="reference external" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager download page</a>.</p></li>
+<li><p>Download and install the software for your operating system (Windows, macOS, or Linux).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These instructions are for Raspberry Pi Imager version 2.0 or later.</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="prepare-the-sd-card">
+<h3>2. Prepare the SD Card<a class="headerlink" href="#prepare-the-sd-card" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Insert your MicroSD card into the card reader and connect it to your computer.</p></li>
+</ul>
+</section>
+<section id="launch-raspberry-pi-imager">
+<h3>3. Launch Raspberry Pi Imager<a class="headerlink" href="#launch-raspberry-pi-imager" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Open the Raspberry Pi Imager application. Imager walks you through each set-up step in order: <strong>Device</strong>, <strong>OS</strong>, <strong>Storage</strong>, <strong>Customisation</strong>, <strong>Writing</strong>, and <strong>Done</strong>.</p></li>
+</ul>
+<hr>
+</section>
+<section id="select-the-device">
+<h3>4. Select the Device<a class="headerlink" href="#select-the-device" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Select <strong>Raspberry Pi 4</strong>, then click <strong>NEXT</strong>.
+<img alt="Select Raspberry Pi 4" src="../_images/imager-select-device.png" /></p></li>
+</ul>
+<hr>
+</section>
+<section id="select-the-os">
+<h3>5. Select the OS<a class="headerlink" href="#select-the-os" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Select <strong>Raspberry Pi OS (64-bit)</strong>, then click <strong>NEXT</strong>.
+<img alt="Select Raspberry Pi OS 64-bit" src="../_images/imager-select-os.png" /></p></li>
+</ul>
+<hr>
+</section>
+<section id="select-the-storage">
+<h3>6. Select the Storage<a class="headerlink" href="#select-the-storage" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Select your MicroSD card from the list, then click <strong>NEXT</strong>.
+<img alt="Select MicroSD card" src="../_images/imager-select-storage.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Leave “Exclude system drives” checked, so you can’t accidentally erase your computer’s own drive.</p>
+</div>
+</li>
+</ul>
+<hr>
+</section>
+<section id="customise-the-os">
+<h3>7. Customise the OS<a class="headerlink" href="#customise-the-os" title="Link to this heading">#</a></h3>
+<p>Imager now walks you through the customisation settings, one screen at a time. Click <strong>NEXT</strong> after each one.</p>
+</section>
+<section id="a-hostname">
+<h3>7a. Hostname<a class="headerlink" href="#a-hostname" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Set the hostname to <strong>valet-vision</strong>, <strong>valet-link</strong>, (or some other preferred name).
+<img alt="Choose hostname" src="../_images/imager-hostname.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you will have more than one Valet on your network, we recommend adding a number after the hostname (e.g. “valet-vision-34”).</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="b-localisation">
+<h3>7b. Localisation<a class="headerlink" href="#b-localisation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><em>(Optional)</em> Set your time zone and keyboard layout.
+<img alt="Localisation" src="../_images/imager-localisation.png" /></p></li>
+</ul>
+</section>
+<section id="c-user">
+<h3>7c. User<a class="headerlink" href="#c-user" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Set the username to <strong>tapster</strong>.</p></li>
+<li><p>Enter a password, then enter it again to confirm it. Store it somewhere safe, like a password manager.
+<img alt="Choose username" src="../_images/imager-user.png" /></p></li>
+</ul>
+</section>
+<section id="d-wi-fi">
+<h3>7d. Wi-Fi<a class="headerlink" href="#d-wi-fi" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>If you’ll be using a <em>wireless</em> network connection with your Valet, enter the SSID (network name) and Wi-Fi password. However, if you’ll be using a <em>wired</em> network connection, then leave the Wi-Fi fields blank.
+<img alt="Choose Wi-Fi" src="../_images/imager-wifi.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On macOS, Imager may offer to fill in the Wi-Fi password from your system keychain. Click <strong>NO</strong> unless you want Valet to join the same Wi-Fi network as your computer.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the default installation, we do not set Wi-Fi credentials here with Raspberry Pi Imager; instead, we use <em><a class="reference external" href="https://davesteele.github.io/comitup/">Comitup</a></em> to bootstrap Wi-Fi support. However, the use of Comitup is configurable, and can be disabled when the system set-up scripts are run in a later step. If you really would rather set up Wi-Fi here, though, go for it!</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="e-remote-access">
+<h3>7e. Remote Access<a class="headerlink" href="#e-remote-access" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Turn on <strong>Enable SSH</strong> and select <strong>Use password authentication</strong>.
+<img alt="SSH authentication" src="../_images/imager-ssh.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also enable key-based authentication later after logging into Valet.</p>
+</div>
+</li>
+</ul>
+</section>
+<section id="f-raspberry-pi-connect">
+<h3>7f. Raspberry Pi Connect<a class="headerlink" href="#f-raspberry-pi-connect" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Leave <strong>Enable Raspberry Pi Connect</strong> turned off.
+<img alt="Raspberry Pi Connect" src="../_images/imager-pi-connect.png" /></p></li>
+</ul>
+<hr>
+</section>
+<section id="write-the-os-to-the-sd-card">
+<h3>8. Write the OS to the SD Card<a class="headerlink" href="#write-the-os-to-the-sd-card" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Review the summary of your choices, then click <strong>WRITE</strong>.
+<img alt="Write image" src="../_images/imager-write-summary.png" /></p></li>
+<li><p>When warned that all data on the SD card will be erased, click <strong>I UNDERSTAND, ERASE AND WRITE</strong>.
+<img alt="Erase warning" src="../_images/imager-erase-warning.png" /></p></li>
+<li><p>If you’re shown an admin prompt, grant the Imager permission to continue.
+<img alt="Admin Permission" src="../_images/admin-permission.png" /></p></li>
+<li><p>Wait for the writing and verifying process to complete; this may take a few minutes.
+<img alt="Writing the image" src="../_images/imager-writing.png" /></p></li>
+</ul>
+</section>
+<section id="remove-the-sd-card">
+<h3>9. Remove the SD Card<a class="headerlink" href="#remove-the-sd-card" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When the write is complete, Imager ejects the SD card automatically. Click <strong>FINISH</strong> and remove the SD card from your computer.
+<img alt="Write complete" src="../_images/imager-write-complete.png" /></p></li>
+</ul>
+<hr>
+</section>
+<section id="boot-up-your-valet">
+<h3>10. Boot Up Your Valet<a class="headerlink" href="#boot-up-your-valet" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Insert the MicroSD card into the Valet’s Raspberry Pi.</p></li>
+<li><p>(Optional) If no wireless connection was configured, connect a wired network cable to the Valet.</p></li>
+<li><p>Connect the Valet to a power supply.</p></li>
+</ul>
+</section>
+<section id="well-done">
+<h3>🎉 Well done!<a class="headerlink" href="#well-done" title="Link to this heading">#</a></h3>
+<p>Well, almost! Your Valet’s Raspberry Pi is now running Raspberry Pi OS, but next we need to install Valet specific software.</p>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../getting-started/">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Getting Started with Valet</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../config-os/">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">How to Configure Raspberry Pi OS for Valet</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+
+  <footer class="sy-foot">
+    <div class="sy-foot-inner sy-container mx-auto">
+      <div class="sy-foot-reserved md:flex justify-between items-center">
+        <div class="sy-foot-copyright"><p>© <a href="https://tapster.io/">Tapster Robotics, Inc.</a></p>
+          
+        </div>
+        <div class="sy-foot-socials">
+  <a href="https://github.com/tapsterbot/valet" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a>
+  <a href="https://twitter.com/tapsterbot" aria-label="X (Twitter)">
+    <iconify-icon icon="simple-icons:x"></iconify-icon>
+  </a></div>
+      </div>
+    </div>
+  </footer>
+
+      <script src="../_static/documentation_options.js?v=ec1fdc2c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>
